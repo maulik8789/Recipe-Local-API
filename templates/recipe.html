@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe</title>
+</head>
+<body>
+        
+    <ol>
+        {% for item in data %}
+            <li>Recipe: {{item['name']}} <br>
+                Ingredients: <br> <ul> {% for i in item['ingredients'] %}    
+                                           <li>{{i}}</li>   
+                                        {% endfor %}
+                                    </ul>
+                Instruction: <br> <ul> {% for i in item['instructions'] %}    
+                    <li>{{i}}</li>   
+                {% endfor %}
+            </ul>
+            </li> 
+        {% endfor %}
+    </ol>
+    
+    <h1>New Recipe</h1>
+    <form action="/addname" method="post">
+        <label for="name">Name of the Recipe</label>
+        <input type="text" name="name" id="name">
+        <button>Add name</button>
+        {% for msg in get_flashed_messages() %}
+        <span style="color: red;">{{msg}}</span>
+        {% endfor %}
+    </form>
+    <br>
+    <form action="/addingredient" method="post">
+        <label for="ingredients">Ingredients for the Recipe</label>
+        <input type="text" name="ingredient" id="ingredient">
+        <input type="submit" value="Add Ingredient">
+    </form>
+    <br>
+    <form action="/addinstruction" method="post">
+        <label for="instruction">Instruction for the Recipe</label>
+        <input type="text" name="instruction" id="instruction">
+        <input type="submit" value="Add Instruction" >
+    </form>
+    <br>
+    <form action="/">
+        <input type="submit" name="add_recipe" value="Add Recipe" autofocus>
+    </form>
+</body>
+</html>
